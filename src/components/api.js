@@ -137,5 +137,3 @@ export async function createMultipleBookings(
 
   return response.json();
 }
-
-export { API_BASE_URL };
