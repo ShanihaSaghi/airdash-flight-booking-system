@@ -40,7 +40,7 @@ export async function getFlights() {
 
 export async function getFlightById(id) {
   const response = await fetch(
-    `http://localhost:8080/api/flights/${id}`
+    `${API_BASE_URL}/api/flights/${id}`
   );
 
   if (!response.ok) {
@@ -56,7 +56,7 @@ export async function createPassenger(passengerData) {
   console.log("TOKEN:", token);
 
   const response = await fetch(
-    "http://localhost:8080/api/passengers",
+    `${API_BASE_URL}/api/passengers`,
     {
       method: "POST",
       headers: {
@@ -92,7 +92,7 @@ export async function createBooking(
   });
 
   const response = await fetch(
-    `http://localhost:8080/api/bookings?${params.toString()}`,
+    `${API_BASE_URL}/api/bookings?${params.toString()}`,
     {
       method: "POST",
       headers: {
