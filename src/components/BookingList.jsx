@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { authFetch } from '../api';
+import { API_BASE_URL } from "./api";
 
 function BookingList() {
   const [bookings, setBookings] = useState([]);
@@ -18,7 +19,7 @@ function BookingList() {
   }, []);
 
   function fetchBookings() {
-    authFetch('http://localhost:8080/api/bookings')
+    authFetch('${API_BASE_URL}/api/bookings')
         .then((response) => {
         if (!response.ok) throw new Error('Failed to fetch bookings');
         return response.json();
@@ -28,7 +29,7 @@ function BookingList() {
   }
 
   function fetchFlights() {
-    authFetch('http://localhost:8080/api/flights')
+    authFetch('${API_BASE_URL}/api/flights')
         .then((response) => {
         if (!response.ok) throw new Error('Failed to fetch flights');
         return response.json();
@@ -38,7 +39,7 @@ function BookingList() {
   }
 
   function fetchPassengers() {
-    authFetch('http://localhost:8080/api/passengers')
+    authFetch('${API_BASE_URL}/api/passengers')
         .then((response) => {
         if (!response.ok) throw new Error('Failed to fetch passengers');
         return response.json();
@@ -54,7 +55,7 @@ function BookingList() {
 
   function handleSubmit(event) {
     event.preventDefault();
-    const url = `http://localhost:8080/api/bookings?flightId=${newBooking.flightId}&passengerId=${newBooking.passengerId}&seatNumber=${newBooking.seatNumber}`;
+    const url = `${API_BASE_URL}/api/bookings?flightId=${newBooking.flightId}&passengerId=${newBooking.passengerId}&seatNumber=${newBooking.seatNumber}`;
 
     authFetch(url, { method: 'POST' })
         .then((response) => {
@@ -70,7 +71,7 @@ function BookingList() {
   }
 
     function handleCancel(id) {
-        authFetch(`http://localhost:8080/api/bookings/${id}/cancel`, { method: 'PUT' })
+        authFetch(`${API_BASE_URL}/api/bookings/${id}/cancel`, { method: 'PUT' })
             .then((response) => {
             if (!response.ok) throw new Error('Failed to cancel booking');
             return response.json();

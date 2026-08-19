@@ -10,6 +10,7 @@ import {
   XCircle,
 } from "lucide-react";
 import Navbar from "./Navbar";
+import { API_BASE_URL } from "./api";
 
 function MyBookings() {
   const navigate = useNavigate();
@@ -44,7 +45,7 @@ function MyBookings() {
       }
 
       const response = await fetch(
-        "http://localhost:8080/api/bookings/my",
+        `${API_BASE_URL}/api/bookings/my`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -89,7 +90,7 @@ function MyBookings() {
       const token = localStorage.getItem("token");
 
       const response = await fetch(
-        `http://localhost:8080/api/bookings/${booking.id}/cancel`,
+        `${API_BASE_URL}/api/bookings/${booking.id}/cancel`,
         {
           method: "PUT",
           headers: {

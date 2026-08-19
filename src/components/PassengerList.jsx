@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { authFetch } from '../api';
+import { API_BASE_URL } from "./api";
 
 function PassengerList() {
   const [passengers, setPassengers] = useState([]);
@@ -16,7 +17,7 @@ function PassengerList() {
   }, []);
 
   function fetchPassengers() {
-    authFetch('http://localhost:8080/api/passengers')
+    authFetch('${API_BASE_URL}/api/passengers')
       .then((response) => {
         if (!response.ok) throw new Error('Failed to fetch passengers');
         return response.json();
@@ -32,7 +33,7 @@ function PassengerList() {
 
   function handleSubmit(event) {
     event.preventDefault();
-    authFetch('http://localhost:8080/api/passengers', {
+    authFetch('${API_BASE_URL}/api/passengers', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(newPassenger),
@@ -49,7 +50,7 @@ function PassengerList() {
   }
 
   function handleDelete(id) {
-    authFetch(`http://localhost:8080/api/passengers/${id}`, { method: 'DELETE' })
+    authFetch(`${API_BASE_URL}/api/passengers/${id}`, { method: 'DELETE' })
       .then((response) => {
         if (!response.ok) throw new Error('Failed to delete passenger');
         fetchPassengers();
@@ -68,7 +69,7 @@ function PassengerList() {
   }
 
   function handleUpdate(id) {
-    authFetch(`http://localhost:8080/api/passengers/${id}`, {
+    authFetch(`${API_BASE_URL}/api/passengers/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(editPassenger),

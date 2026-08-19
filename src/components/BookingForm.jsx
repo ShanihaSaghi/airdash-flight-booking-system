@@ -16,6 +16,7 @@ import {
 import {
   authFetch,
 } from "./api";
+import { API_BASE_URL } from "./api";
 
 function BookingForm() {
   const { id } = useParams();
@@ -48,7 +49,7 @@ function BookingForm() {
         setLoadingFlight(true);
 
         const response = await fetch(
-          `http://localhost:8080/api/flights/${id}`
+          `${API_BASE_URL}/api/flights/${id}`
         );
 
         if (!response.ok) {
@@ -82,7 +83,7 @@ function BookingForm() {
         setError("");
 
         const response = await authFetch(
-          `http://localhost:8080/api/bookings/flight/${id}/seats`
+          `${API_BASE_URL}/api/bookings/flight/${id}/seats`
         );
 
         if (!response.ok) {
